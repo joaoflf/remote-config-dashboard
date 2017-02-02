@@ -1,9 +1,12 @@
+import { applicationReducer } from './state-management/application';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
+import { StoreModule } from '@ngrx/store';
+
 
 @NgModule({
   declarations: [
@@ -12,7 +15,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ClarityModule.forChild(),
+    StoreModule.provideStore(applicationReducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
