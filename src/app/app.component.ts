@@ -1,4 +1,4 @@
-import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE } from './state-management/application';
+import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE, UPDATE_APP_NAME } from './state-management/application';
 import { Application } from './state-management/application';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -46,6 +46,22 @@ export class AppComponent {
         id: '1'
       }
     });
-      console.log(store);
+
+    store.dispatch({
+      type: UPDATE_FEATURE_TOGGLE,
+      payload:
+      {
+        id: '2',
+        state: true
+      }
+    });
+
+    store.dispatch({
+      type: UPDATE_APP_NAME,
+      payload:
+      {
+        name: 'testApp'
+      }
+    });
   }
 }
