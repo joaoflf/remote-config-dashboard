@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Rx';
 import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE, UPDATE_APP_NAME } from './state-management/application';
 import { Application } from './state-management/application';
 import { Component } from '@angular/core';
@@ -11,7 +12,8 @@ import { FeatureToggle } from './state-management/feature-toggle';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  featureToggles$: Observable<Array<FeatureToggle>>;
 
   constructor(private store: Store<Application>) {
     console.log(store);
@@ -39,28 +41,16 @@ export class AppComponent {
       }
     });
 
-    store.dispatch({
-      type: REMOVE_FEATURE_TOGGLE,
-      payload:
-      {
-        id: '1'
-      }
-    });
+    this.featureToggles$ = store.select(state => state.featureToggles);
+  }
 
-    store.dispatch({
+  updateFeatureToggle(id: String, state: boolean) {
+    this.store.dispatch({
       type: UPDATE_FEATURE_TOGGLE,
       payload:
       {
-        id: '2',
-        state: true
-      }
-    });
-
-    store.dispatch({
-      type: UPDATE_APP_NAME,
-      payload:
-      {
-        name: 'testApp'
+        id: id,
+        state: state
       }
     });
   }

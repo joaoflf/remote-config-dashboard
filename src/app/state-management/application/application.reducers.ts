@@ -32,9 +32,9 @@ export const applicationReducer: ActionReducer<Application> = (applicationState 
             let updatedFeatureToggles = applicationState.featureToggles.map(toggle => {
                 return toggle.id === id ? Object.assign({}, toggle, { state: state }) : toggle;
             });
-            return Object.assign({}, applicationState, { featureToggles: updatedFeatureToggles })
+            return Object.assign({}, applicationState, { featureToggles: updatedFeatureToggles });
         default: {
             return applicationState;
         }
     }
-}
+};
