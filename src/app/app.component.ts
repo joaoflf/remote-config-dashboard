@@ -1,10 +1,8 @@
-import { Observable } from 'rxjs/Rx';
-import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE, UPDATE_APP_NAME } from './state-management/application';
-import { Application } from './state-management/application';
-import { Component } from '@angular/core';
+import { Application, UPDATE_PROPERTIES } from './state-management/application';
+import { Component, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { FeatureToggle } from './state-management/feature-toggle';
-
+import { Observable } from 'rxjs/Rx';
+import { JsonEditorComponent, JsonEditorOptions } from 'ng2-jsoneditor';
 
 @Component({
   selector: 'app-root',
@@ -13,45 +11,31 @@ import { FeatureToggle } from './state-management/feature-toggle';
 })
 export class AppComponent {
 
-  featureToggles$: Observable<Array<FeatureToggle>>;
+  appName$: Observable<String>;
+  configProperties$: Observable<Object>;
+  public editorOptions: JsonEditorOptions;
+  @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
 
   constructor(private store: Store<Application>) {
-    console.log(store);
-    store.dispatch({
-      type: ADD_FEATURE_TOGGLE,
-      payload:
-      {
-        featureToggle: <FeatureToggle>{
-          id: '1',
-          name: 'testToggle',
-          state: true
-        }
-      }
-    });
-
-    store.dispatch({
-      type: ADD_FEATURE_TOGGLE,
-      payload:
-      {
-        featureToggle: <FeatureToggle>{
-          id: '2',
-          name: 'testToggle2',
-          state: false
-        }
-      }
-    });
-
-    this.featureToggles$ = store.select(state => state.featureToggles);
+    this.appName$ = store.select(state => state.name);
+    this.configProperties$ = store.select(state => state.properties);
+    this.editorOptions = new JsonEditorOptions();
+    this.editorOptions.modes = ['tree', 'code'];
+    //need to bind component to function as the library weirdly binds editorOptions
+    this.editorOptions.onChange = this.onJsonEditorChange.bind(this);
+    console.log(this.editorOptions);
   }
 
-  updateFeatureToggle(id: String, state: boolean) {
-    this.store.dispatch({
-      type: UPDATE_FEATURE_TOGGLE,
-      payload:
-      {
-        id: id,
-        state: state
-      }
-    });
+  onJsonEditorChange() {
+    try {
+      this.store.dispatch({
+        type: UPDATE_PROPERTIES,
+        payload:
+        {
+          properties: this.editor.get()
+        }
+      });
+    } catch (e) {
+    }
   }
 }

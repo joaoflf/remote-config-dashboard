@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+div.jsoneditor-tree {
+    min-height: 250px;
+}
+
+.jsoneditor {
+    border-color: #006a91 !important;
+}
+
+div.jsoneditor-menu {
+    border-color: #006a91 !important;
+    background-color: #006a91 !important;
+}
+
+*:focus {
+    outline: none !important;
+}

@@ -1,0 +1,55 @@
+<button class="btn btn-outline-primary btn-sm" (click)="addNewFeatureToggle()">Add Toggle</button>
+<table class="toggles-table table">
+    <thead>
+        <tr>
+            <th>Feature</th>
+            <th>State</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let toggle of featureToggles$ | async">
+            <td>{{toggle.name}}</td>
+            <td>
+                <div class="toggle-switch">
+                    <input type="checkbox" id="{{toggle.id}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.id, $event.target.checked)">
+                    <label for="{{toggle.id}}"></label>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<clr-modal [(clrModalOpen)]="isAddToggleModalOpen">
+    <h5 class="modal-title">Create a new feature toggle</h5>
+    <div class="modal-body">
+        <form class="form" [formGroup]="featureToggleForm" (ngSubmit)="onSubmit()" [hidden]="submitted">
+            <section class="form-block">
+                <div class="form-group">
+                    <label for="toggleName">Feature Name</label>
+                    <label for="toggleName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-right" [class.invalid]="featureToggleForm.get('toggleName').invalid
+                    && (featureToggleForm.get('toggleName').dirty || featureToggleForm.get('toggleName').touched)">
+                        <input id="toggleName" type="text"
+                            formControlName="toggleName">
+                        <span class="tooltip-content">
+                            Name is required.
+                        </span>
+                    </label>
+                </div>
+                <div formGroupName="toggleState">
+                    <div class="form-group">
+                        <label for="toggleState">Initial State</label>
+                        <div for="toggleState" class="toggle-switch">
+                            <input id="state" type="checkbox" formControlName="state">
+                            <label for="state"></label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="isAddToggleModalOpen = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="isAddToggleModalOpen = false" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
+    </div>
+</clr-modal>

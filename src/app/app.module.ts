@@ -1,3 +1,4 @@
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { applicationReducer } from './state-management/application';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -6,18 +7,27 @@ import { HttpModule } from '@angular/http';
 import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
+import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
+import { JSONEditorModule } from 'ng2-jsoneditor';
+import { ReactiveFormsModule } from '@angular/forms'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FeatureTogglesComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     ClarityModule.forChild(),
-    StoreModule.provideStore(applicationReducer)
+    StoreModule.provideStore(applicationReducer),
+    StoreDevtoolsModule.instrumentOnlyWithExtension({
+      maxAge: 5
+    }),
+    JSONEditorModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

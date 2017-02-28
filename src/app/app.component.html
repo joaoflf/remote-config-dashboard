@@ -9,48 +9,34 @@
     </header>
     <div class="content-container">
         <div class="content-area">
-            <div class="content-area">
-                <div class="row flex-items-xs-center">
-                    <div class="col-xs-12 col-md-10 col-lg-6 ">
-                        <div class="row flex-items-xs-between flex-items-xs-middle">
-                            <h3 class="app-title">
-                                Costa Android
-                            </h3>
-                            <clr-dropdown>
-                                <button class="btn btn-outline-primary" clrDropdownToggle>
-                            Change app
-                            <clr-icon shape="caret down"></clr-icon>
-                        </button>
-                                <div class="dropdown-menu">
-
-                                    <a href="..." clrDropdownItem>Link 1</a>
-                                    <a href="..." clrDropdownItem>Link 2</a>
-                                </div>
-                            </clr-dropdown>
-                        </div>
-                        <div class="row flex-items-xs-center">
-                            <table class="toggles-table table">
-                                <thead>
-                                    <tr>
-                                        <th>Feature</th>
-                                        <th>State</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let toggle of featureToggles$ | async">
-                                        <td>{{toggle.name}}</td>
-                                        <td>
-                                            <div class="toggle-switch">
-                                                <input type="checkbox" id="{{toggle.id}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle._id, $event.target.checked)">
-                                                <label for="{{toggle.id}}"></label>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+            <div class="row col-xs-12">
+                <h3 class="app-title ">
+                    {{appName$ | async}}
+                </h3>
+                <clr-dropdown class="">
+                    <button class="btn btn-link" clrDropdownToggle>
+                        Change app
+                        <clr-icon shape="caret down"></clr-icon>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="..." clrDropdownItem>Costa iOS</a>
+                        <a href="..." clrDropdownItem>Premier Inn Android</a>
+                        <a href="..." clrDropdownItem>Premier Inn iOS</a>
                     </div>
-                </div>
+                </clr-dropdown>
             </div>
+
+            <clr-tabs class="tabs row flex-items-xs-center">
+                <clr-tab-link>Feature Toggles</clr-tab-link>
+                <clr-tab-link>Config Properties</clr-tab-link>
+                <clr-tab-content class="col-xs-12 col-md-10 col-lg-8 col-xl-6 panel">
+                    <app-feature-toggles></app-feature-toggles>
+                </clr-tab-content>
+                <clr-tab-content class="col-xs-12 col-md-10 col-lg-8 col-xl-6 panel">
+                    <div>
+                        <json-editor [options]="editorOptions" [data]="configProperties$ | async"></json-editor>
+                    </div>
+                </clr-tab-content>
+            </clr-tabs>
         </div>
     </div>

@@ -19,7 +19,8 @@
         "styles": [
             "styles.scss",
             "../node_modules/clarity-icons/clarity-icons.min.css",
-            "../node_modules/clarity-ui/clarity-ui.min.css"
+            "../node_modules/clarity-ui/clarity-ui.min.css",
+            "../node_modules/jsoneditor/dist/jsoneditor.min.css"
         ],
         "scripts": [
             "../node_modules/mutationobserver-shim/dist/mutationobserver.min.js",
