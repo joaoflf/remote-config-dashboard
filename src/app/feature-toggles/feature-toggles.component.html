@@ -1,9 +1,10 @@
-<button class="btn btn-outline-primary btn-sm" (click)="addNewFeatureToggle()">Add Toggle</button>
+<button class="btn btn-outline-primary btn-sm" (click)="openAddToggleModal()">Add Toggle</button>
 <table class="toggles-table table">
     <thead>
         <tr>
             <th>Feature</th>
             <th>State</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -11,9 +12,12 @@
             <td>{{toggle.name}}</td>
             <td>
                 <div class="toggle-switch">
-                    <input type="checkbox" id="{{toggle.id}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.id, $event.target.checked)">
-                    <label for="{{toggle.id}}"></label>
+                    <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.name, $event.target.checked)">
+                    <label for="{{toggle.name}}"></label>
                 </div>
+            </td>
+            <td>
+                <clr-icon class="remove-toggle" shape="trash" size="16" (click)="removeFeatureToggle(toggle.name)"></clr-icon>
             </td>
         </tr>
     </tbody>
@@ -23,7 +27,7 @@
 <clr-modal [(clrModalOpen)]="isAddToggleModalOpen">
     <h5 class="modal-title">Create a new feature toggle</h5>
     <div class="modal-body">
-        <form class="form" [formGroup]="featureToggleForm" (ngSubmit)="onSubmit()" [hidden]="submitted">
+        <form class="form" [formGroup]="featureToggleForm" [hidden]="submitted">
             <section class="form-block">
                 <div class="form-group">
                     <label for="toggleName">Feature Name</label>
@@ -50,6 +54,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="isAddToggleModalOpen = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="isAddToggleModalOpen = false" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
+        <button class="btn btn-primary" (click)="onAddToggleSubmit()" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
     </div>
 </clr-modal>

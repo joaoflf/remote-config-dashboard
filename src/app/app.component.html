@@ -33,9 +33,7 @@
                     <app-feature-toggles></app-feature-toggles>
                 </clr-tab-content>
                 <clr-tab-content class="col-xs-12 col-md-10 col-lg-8 col-xl-6 panel">
-                    <div>
-                        <json-editor [options]="editorOptions" [data]="configProperties$ | async"></json-editor>
-                    </div>
+                    <app-config-properties></app-config-properties>
                 </clr-tab-content>
             </clr-tabs>
         </div>

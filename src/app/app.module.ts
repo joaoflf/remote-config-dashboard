@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
 import { JSONEditorModule } from 'ng2-jsoneditor';
-import { ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms';
+import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    FeatureTogglesComponent
+    FeatureTogglesComponent,
+    ConfigPropertiesComponent
   ],
   imports: [
     BrowserModule,

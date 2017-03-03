@@ -2,8 +2,8 @@ import { FeatureToggle } from '../state-management/feature-toggle';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
-import { Application, UPDATE_FEATURE_TOGGLE } from '../state-management/application';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ADD_FEATURE_TOGGLE, Application, UPDATE_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE } from '../state-management/application';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-feature-toggles',
@@ -13,38 +13,62 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class FeatureTogglesComponent implements OnInit {
 
   featureToggles$: Observable<Array<FeatureToggle>>;
-
-  featureToggleForm = new FormGroup({
-    toggleName: new FormControl('', Validators.required),
-    toggleState: new FormGroup({
-      state: new FormControl('')
-    })
-  });
-
   submitted = false;
   isAddToggleModalOpen = false;
-  onSubmit() {
+  featureToggleForm: any;
+
+  constructor(private store: Store<Application>, private fb: FormBuilder) {
+    this.featureToggles$ = store.select(state => state.featureToggles);
   }
-  addNewFeatureToggle() {
+
+  openAddToggleModal() {
     this.featureToggleForm.reset();
     this.submitted = false;
     this.isAddToggleModalOpen = true;
   }
 
-  constructor(private store: Store<Application>) {
-    this.featureToggles$ = store.select(state => state.featureToggles);
-  }
-
   ngOnInit() {
+    this.featureToggleForm = this.fb.group({
+      toggleName: new FormControl('', Validators.required),
+      toggleState: new FormGroup({
+        state: new FormControl('')
+      })
+    });
   }
 
-  updateFeatureToggle(id: String, state: boolean) {
+  onAddToggleSubmit() {
+    this.isAddToggleModalOpen = false;
+    let formData = this.featureToggleForm.value;
+
+     this.store.dispatch({
+      type: ADD_FEATURE_TOGGLE,
+      payload:
+      {
+        featureToggle: {
+          name: formData.toggleName,
+          state: formData.toggleState.state
+        }
+      }
+    });
+  }
+
+  updateFeatureToggle(name: String, state: boolean) {
     this.store.dispatch({
       type: UPDATE_FEATURE_TOGGLE,
       payload:
       {
-        id: id,
+        name: name,
         state: state
+      }
+    });
+  }
+
+  removeFeatureToggle(name: String) {
+    this.store.dispatch({
+      type: REMOVE_FEATURE_TOGGLE,
+      payload:
+      {
+        name: name
       }
     });
   }

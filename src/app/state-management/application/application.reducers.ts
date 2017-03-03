@@ -1,19 +1,18 @@
 import { FeatureToggle } from './../feature-toggle/feature-toggle.model';
 import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE,
     UPDATE_APP_NAME, UPDATE_PROPERTIES } from './application.actions';
-import { Application } from './application.model';
-import { ActionReducer, Action } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import { initialApplicationState } from './application.state';
 
-export const applicationReducer: ActionReducer<Application> = (applicationState = initialApplicationState, action: Action) => {
-    let id: String, featureToggle: FeatureToggle, state: boolean, name: String,
+ function applicationReducerFn(applicationState = initialApplicationState, action: Action) {
+    let featureToggle: FeatureToggle, state: boolean, name: String,
         properties: Object;
     switch (action.type) {
 
         case UPDATE_APP_NAME:
             ({ name } = action.payload);
             return Object.assign({}, applicationState, { name: name });
-        
+
         case ADD_FEATURE_TOGGLE:
             ({ featureToggle } = action.payload);
             return Object.assign({}, applicationState, {
@@ -24,18 +23,18 @@ export const applicationReducer: ActionReducer<Application> = (applicationState 
             });
 
         case REMOVE_FEATURE_TOGGLE:
-            ({ id } = action.payload);
+            ({ name } = action.payload);
             return Object.assign({}, applicationState, {
                 featureToggles: applicationState.featureToggles.filter((toggle) => {
-                    return toggle.id !== id;
+                    return toggle.name !== name;
                 })
             });
 
         case UPDATE_FEATURE_TOGGLE:
-            ({ id } = action.payload);
+            ({ name } = action.payload);
             ({ state } = action.payload);
             let updatedFeatureToggles = applicationState.featureToggles.map(toggle => {
-                return toggle.id === id ? Object.assign({}, toggle, { state: state }) : toggle;
+                return toggle.name === name ? Object.assign({}, toggle, { state: state }) : toggle;
             });
             return Object.assign({}, applicationState, { featureToggles: updatedFeatureToggles });
 
@@ -48,3 +47,5 @@ export const applicationReducer: ActionReducer<Application> = (applicationState 
         }
     }
 };
+
+export const applicationReducer = applicationReducerFn;

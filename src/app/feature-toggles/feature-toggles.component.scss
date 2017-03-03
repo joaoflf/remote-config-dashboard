@@ -8,3 +8,10 @@
         margin: 0;
     }
 }
+
+.remove-toggle {
+    cursor: pointer;
+    &:hover {
+        color: black;
+    }
+}
