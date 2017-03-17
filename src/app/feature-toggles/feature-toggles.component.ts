@@ -13,18 +13,19 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class FeatureTogglesComponent implements OnInit {
 
   featureToggles$: Observable<Array<FeatureToggle>>;
+  featureToggles: Array<FeatureToggle>;
   submitted = false;
   isAddToggleModalOpen = false;
+  isConfirmationModalOpen = false;
+  toggleExistsWarning = false;
   featureToggleForm: any;
+  confirmationMessage: String;
+  selectedToggleName: String;
 
   constructor(private store: Store<Application>, private fb: FormBuilder) {
     this.featureToggles$ = store.select(state => state.featureToggles);
-  }
-
-  openAddToggleModal() {
-    this.featureToggleForm.reset();
-    this.submitted = false;
-    this.isAddToggleModalOpen = true;
+    // for sync operations
+    this.featureToggles$.subscribe((toggles) => { this.featureToggles = toggles; });
   }
 
   ngOnInit() {
@@ -36,20 +37,34 @@ export class FeatureTogglesComponent implements OnInit {
     });
   }
 
-  onAddToggleSubmit() {
-    this.isAddToggleModalOpen = false;
-    let formData = this.featureToggleForm.value;
+  openAddToggleModal() {
+    this.featureToggleForm.reset();
+    this.submitted = false;
+    this.isAddToggleModalOpen = true;
+  }
 
-     this.store.dispatch({
-      type: ADD_FEATURE_TOGGLE,
-      payload:
-      {
-        featureToggle: {
-          name: formData.toggleName,
-          state: formData.toggleState.state
+  doesToggleAlreadyExist(name) {
+    return this.featureToggles.filter((toggle) => toggle.name === name).length;
+  }
+
+  addToggleClicked() {
+    this.toggleExistsWarning = false;
+    let formData = this.featureToggleForm.value;
+    if (this.doesToggleAlreadyExist(formData.toggleName)) {
+      this.toggleExistsWarning = true;
+    } else {
+      this.isAddToggleModalOpen = false;
+      this.store.dispatch({
+        type: ADD_FEATURE_TOGGLE,
+        payload:
+        {
+          featureToggle: {
+            name: formData.toggleName,
+            state: !!formData.toggleState.state
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   updateFeatureToggle(name: String, state: boolean) {
@@ -64,11 +79,23 @@ export class FeatureTogglesComponent implements OnInit {
   }
 
   removeFeatureToggle(name: String) {
+    this.isConfirmationModalOpen = true;
+    this.openConfirmationModal(`Are you sure you want to remove the toggle ${name}?`);
+    this.selectedToggleName = name;
+  }
+
+  openConfirmationModal(message: String) {
+    this.isConfirmationModalOpen = true;
+    this.confirmationMessage = message;
+  }
+
+  confirmToggleRemoval() {
+    this.isConfirmationModalOpen = false;
     this.store.dispatch({
       type: REMOVE_FEATURE_TOGGLE,
       payload:
       {
-        name: name
+        name: this.selectedToggleName
       }
     });
   }

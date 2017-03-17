@@ -12,16 +12,14 @@ export const initialApplicationState: Application = {
     termsConditionsURL: 'www.google.com',
     property1: 'I am a property'
   },
-  featureToggles: [
+  featureToggles: new Array<FeatureToggle>(
     {
-      id: '1',
       name: 'testToggle',
       state: true
     },
     {
-      id: '2',
       name: 'testToggle2',
       state: false
     }
-  ]
+  )
 };

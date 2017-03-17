@@ -16,7 +16,7 @@ export class ConfigPropertiesComponent implements OnInit {
   @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
 
   constructor(private store: Store<Application>) {
-        this.configProperties$ = store.select(state => state.properties);
+    this.configProperties$ = store.select(state => state.properties);
     this.editorOptions = new JsonEditorOptions();
     this.editorOptions.modes = ['tree', 'code'];
     // need to bind component to function as the library weirdly binds editorOptions

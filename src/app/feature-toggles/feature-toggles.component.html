@@ -27,6 +27,13 @@
 <clr-modal [(clrModalOpen)]="isAddToggleModalOpen">
     <h5 class="modal-title">Create a new feature toggle</h5>
     <div class="modal-body">
+        <div class="alert alert-danger" *ngIf="toggleExistsWarning">
+            <div class="alert-item">
+                <span class="alert-text">
+                A toggle with this name already exists.
+            </span>
+            </div>
+        </div>
         <form class="form" [formGroup]="featureToggleForm" [hidden]="submitted">
             <section class="form-block">
                 <div class="form-group">
@@ -54,6 +61,15 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="isAddToggleModalOpen = false">Cancel</button>
-        <button class="btn btn-primary" (click)="onAddToggleSubmit()" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
+        <button class="btn btn-primary" (click)="addToggleClicked()" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
+    </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="isConfirmationModalOpen">
+    <div class="modal-body">
+        <p>{{this.confirmationMessage}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="isConfirmationModalOpen = false">No</button>
+        <button type="button" class="btn btn-primary" (click)="confirmToggleRemoval()">Yes</button>
     </div>
 </clr-modal>

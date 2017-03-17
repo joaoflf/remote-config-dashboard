@@ -4,7 +4,7 @@ import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE,
 import { Action } from '@ngrx/store';
 import { initialApplicationState } from './application.state';
 
- function applicationReducerFn(applicationState = initialApplicationState, action: Action) {
+ export function applicationReducer(applicationState = initialApplicationState, action: Action) {
     let featureToggle: FeatureToggle, state: boolean, name: String,
         properties: Object;
     switch (action.type) {
@@ -48,4 +48,3 @@ import { initialApplicationState } from './application.state';
     }
 };
 
-export const applicationReducer = applicationReducerFn;
