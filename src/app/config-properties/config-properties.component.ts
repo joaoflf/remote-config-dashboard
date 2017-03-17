@@ -4,6 +4,7 @@ import { Application, UPDATE_PROPERTIES } from '../state-management/application'
 import { JsonEditorComponent, JsonEditorOptions } from 'ng2-jsoneditor';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
+
 @Component({
   selector: 'app-config-properties',
   templateUrl: './config-properties.component.html',
