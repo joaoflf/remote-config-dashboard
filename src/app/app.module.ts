@@ -8,7 +8,6 @@ import { ClarityModule } from 'clarity-angular';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
-import { JSONEditorModule } from 'ng2-jsoneditor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
 
@@ -28,7 +27,6 @@ import { ConfigPropertiesComponent } from './config-properties/config-properties
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),
-    JSONEditorModule,
     ReactiveFormsModule
   ],
   providers: [],

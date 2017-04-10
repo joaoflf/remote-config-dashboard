@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import { Application, UPDATE_PROPERTIES } from '../state-management/application';
-import { JsonEditorComponent, JsonEditorOptions } from 'ng2-jsoneditor';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChange} from '@angular/core';
 
+declare var JSONEditor;
 
 @Component({
   selector: 'app-config-properties',
@@ -12,23 +12,30 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ConfigPropertiesComponent implements OnInit {
 
-  configProperties$: Observable<Object>;
-  public editorOptions: JsonEditorOptions;
-  @ViewChild(JsonEditorComponent) editor: JsonEditorComponent;
+  editor : any;
 
   constructor(private store: Store<Application>) {
-    this.configProperties$ = store.select(state => state.properties);
-    this.editorOptions = new JsonEditorOptions();
-    this.editorOptions.modes = ['tree', 'code'];
-    // need to bind component to function as the library weirdly binds editorOptions
-    this.editorOptions.onChange = this.onJsonEditorChange.bind(this);
+    this.store = store;
   }
 
   ngOnInit() {
   }
 
+  ngAfterViewInit() {
+   let editorOptions = {
+      modes: ['tree', 'code'],
+      onChange: this.onJsonEditorChange.bind(this)
+    };
+    this.store.select(state => state.properties).subscribe((properties) => {
+      if (!this.editor) {
+        let templateDivRef = document.getElementById('jsoneditor');
+        this.editor = new JSONEditor(templateDivRef, editorOptions, properties); 
+      }
+    }); 
+  }
+
   onJsonEditorChange() {
-    try {
+     try {
       this.store.dispatch({
         type: UPDATE_PROPERTIES,
         payload:
@@ -39,5 +46,4 @@ export class ConfigPropertiesComponent implements OnInit {
     } catch (e) {
     }
   }
-
 }
