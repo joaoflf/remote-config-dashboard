@@ -1,7 +1,9 @@
 import { FeatureToggle } from '../feature-toggle';
+import { App } from '../app';
 
 export interface Application {
-    name: String;
-    properties: {};
+    selectedApp: App;
+    properties: Object;
     featureToggles: Array<FeatureToggle>;
+    appList: Array<App>;
 };

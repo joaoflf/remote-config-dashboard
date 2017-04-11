@@ -7,7 +7,10 @@ import { Application } from '.';
 //   featureToggles: new Array<FeatureToggle>()
 // };
 export const initialApplicationState: Application = {
-  name: 'Costa Android',
+  selectedApp: {
+    id: 1,
+    name: 'Web App'
+  },
   properties: {
     termsConditionsURL: 'www.google.com',
     property1: 'I am a property'
@@ -21,5 +24,17 @@ export const initialApplicationState: Application = {
       name: 'testToggle2',
       state: false
     }
-  )
+  ),
+  appList: [{
+    id: 1,
+    name: 'Web App'
+  },
+  {
+    id: 2,
+    name: 'Android App'
+  },
+  {
+    id: 3,
+    name: 'iOS App'
+  }]
 };
