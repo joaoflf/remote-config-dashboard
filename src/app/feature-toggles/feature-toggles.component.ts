@@ -2,7 +2,7 @@ import { FeatureToggle } from '../state-management/feature-toggle';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core';
-import { ADD_FEATURE_TOGGLE, Application, UPDATE_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE } from '../state-management/application';
+import { ADD_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE } from '../state-management/feature-toggle';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -22,8 +22,8 @@ export class FeatureTogglesComponent implements OnInit {
   confirmationMessage: String;
   selectedToggleName: String;
 
-  constructor(private store: Store<Application>, private fb: FormBuilder) {
-    this.featureToggles$ = store.select(state => state.featureToggles);
+  constructor(private store: Store<FeatureToggle[]>, private fb: FormBuilder) {
+    this.featureToggles$ = store.select('featureTogglesReducer');
     // for sync operations
     this.featureToggles$.subscribe((toggles) => { this.featureToggles = toggles; });
   }
@@ -58,10 +58,8 @@ export class FeatureTogglesComponent implements OnInit {
         type: ADD_FEATURE_TOGGLE,
         payload:
         {
-          featureToggle: {
             name: formData.toggleName,
             state: !!formData.toggleState.state
-          }
         }
       });
     }
@@ -98,5 +96,6 @@ export class FeatureTogglesComponent implements OnInit {
         name: this.selectedToggleName
       }
     });
+    
   }
 }

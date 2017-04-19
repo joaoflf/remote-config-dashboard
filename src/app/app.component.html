@@ -11,7 +11,7 @@
         <div class="content-area">
             <div class="row col-xs-12">
                 <h3 class="app-title ">
-                    {{ (selectedApp$ | async)?.name }}
+                    {{ (state$ | async)?.app.name }}
                 </h3>
                 <clr-dropdown class="">
                     <button class="btn btn-link" clrDropdownToggle>
@@ -19,7 +19,7 @@
                         <clr-icon shape="caret down"></clr-icon>
                     </button>
                     <div class="dropdown-menu">
-                        <a *ngFor="let app of appList$ | async" href="..." clrDropdownItem>{{ app.name }}</a>
+                        <a *ngFor="let app of (state$ | async)?.appList" href="..." clrDropdownItem>{{ app.name }}</a>
                     </div>
                 </clr-dropdown>
             </div>

@@ -1,4 +1,5 @@
 export interface App {
-  id: Number;
+  id: String;
   name: String;
+  properties: Object;
 }

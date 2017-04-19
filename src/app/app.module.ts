@@ -1,3 +1,4 @@
+import { featureTogglesReducer } from './state-management/feature-toggle/feature-toggle.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { applicationReducer } from './state-management/application';
 import { BrowserModule} from '@angular/platform-browser';
@@ -11,6 +12,8 @@ import { StoreModule } from '@ngrx/store';
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
+import { EffectsModule } from '@ngrx/effects';
+import { ApplicationsEffects } from './state-management/application/application.effects';
 
 
 @NgModule({
@@ -24,12 +27,13 @@ import { ConfigPropertiesComponent } from './config-properties/config-properties
     FormsModule,
     HttpModule,
     ClarityModule.forChild(),
-    StoreModule.provideStore(applicationReducer),
+    StoreModule.provideStore({applicationReducer, featureTogglesReducer}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    EffectsModule.run(ApplicationsEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]

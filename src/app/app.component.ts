@@ -1,3 +1,4 @@
+import { APPLICATION_LAUNCH } from './state-management/application';
 import { Application } from './state-management/application';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -10,11 +11,15 @@ import { App } from './state-management/app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedApp$: Observable<App>;
-  appList$: Observable<Array<App>>;
+  state$: Observable<Application>;
 
   constructor(private store: Store<Application>) {
-    this.selectedApp$ = store.select(state => state.selectedApp);
-    this.appList$ = store.select(state => state.appList);
+
+    this.state$ = store.select('applicationReducer');
+
+    store.dispatch({
+        type: 'APPLICATION_LAUNCH',
+        payload: {}
+      });
   }
 }

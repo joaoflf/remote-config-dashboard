@@ -1,0 +1,7 @@
+{
+    "/apps": {
+        "target": "http://demo6219157.mockable.io/",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

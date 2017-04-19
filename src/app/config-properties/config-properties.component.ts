@@ -26,10 +26,10 @@ export class ConfigPropertiesComponent implements OnInit {
       modes: ['tree', 'code'],
       onChange: this.onJsonEditorChange.bind(this)
     };
-    this.store.select(state => state.properties).subscribe((properties) => {
+    this.store.select('applicationReducer').subscribe((application:Application) => {
       if (!this.editor) {
         let templateDivRef = document.getElementById('jsoneditor');
-        this.editor = new JSONEditor(templateDivRef, editorOptions, properties); 
+        this.editor = new JSONEditor(templateDivRef, editorOptions, application.app.properties); 
       }
     }); 
   }
