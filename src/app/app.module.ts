@@ -1,6 +1,6 @@
-import { featureTogglesReducer } from './state-management/feature-toggle/feature-toggle.reducers';
+import { featureToggles } from './state-management/feature-toggles';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { applicationReducer } from './state-management/application';
+import { application } from './state-management/application';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule,  } from '@angular/core';
@@ -27,7 +27,7 @@ import { ApplicationsEffects } from './state-management/application/application.
     FormsModule,
     HttpModule,
     ClarityModule.forChild(),
-    StoreModule.provideStore({applicationReducer, featureTogglesReducer}),
+    StoreModule.provideStore({application, featureToggles}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),

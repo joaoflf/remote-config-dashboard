@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor(private store: Store<Application>) {
 
-    this.state$ = store.select('applicationReducer');
+    this.state$ = store.select('application');
 
     store.dispatch({
         type: 'APPLICATION_LAUNCH',

@@ -8,7 +8,7 @@ import {
 import { Action } from '@ngrx/store';
 import { initialApplicationState } from './application.state';
 
- export function applicationReducer(applicationState = initialApplicationState, action: Action) {
+ export function application(applicationState = initialApplicationState, action: Action) {
     let name: String, properties: Object, appList: Array<App>;
     switch (action.type) {
 

@@ -1,8 +1,8 @@
-import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE } from './feature-toggle.actions';
+import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE } from './feature-toggles.actions';
 import { Action } from '@ngrx/store';
-import { initialFeatureTogglesState } from './feature-toggle.state';
+import { initialFeatureTogglesState } from './feature-toggles.state';
 
-export function featureTogglesReducer(featureTogglesState = initialFeatureTogglesState, action: Action) {
+export function featureToggles(featureTogglesState = initialFeatureTogglesState, action: Action) {
     let state: boolean, name: String;
     switch (action.type) {
 
