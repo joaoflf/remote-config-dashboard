@@ -1,6 +1,6 @@
 {
     "/apps": {
-        "target": "http://demo6219157.mockable.io/",
+        "target": "http://localhost:3000/",
         "secure": false,
         "changeOrigin": true
     }

@@ -17,7 +17,7 @@ The idea is for the app to manage all its state offline and when the user wishes
 
 
 ### Development
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm start` to launch the web server and json mock api server. Navigate to `http://localhost:4200/` for the web app and http://localhost:3000/ for the api. The app will automatically reload if you change any of the source files.
 
 ## Next steps
 The imediate next step is develop a separate web API in ExpressJS+MongoDB or similar to manage and serve the configs.

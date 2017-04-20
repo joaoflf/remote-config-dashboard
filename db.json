@@ -1,0 +1,15 @@
+{
+    "apps": [{
+            "id": "1",
+            "name": "Web App"
+        },
+        {
+            "id": "2",
+            "name": "Android App"
+        },
+        {
+            "id": "3",
+            "name": "iOS App"
+        }
+    ]
+}

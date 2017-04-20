@@ -21,9 +21,6 @@ export class AppsEffects {
         return {
           type: LOAD_APPS_SUCCESS,
           payload: apps
-          
         }
       });
-
-
 }
