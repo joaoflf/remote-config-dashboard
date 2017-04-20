@@ -1,5 +1,4 @@
-import { APPLICATION_LAUNCH } from './state-management/application';
-import { Application } from './state-management/application';
+import { LOAD_APPS } from './state-management/apps';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
@@ -11,14 +10,16 @@ import { App } from './state-management/app';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  state$: Observable<Application>;
+  selectedApp$: Observable<App>;
+  apps$: Observable<Array<App>>;
 
-  constructor(private store: Store<Application>) {
+  constructor(private store: Store<App>) {
 
-    this.state$ = store.select('application');
+    this.selectedApp$ = store.select('app');
+    this.apps$ = store.select('apps');
 
     store.dispatch({
-        type: 'APPLICATION_LAUNCH',
+        type: 'LOAD_APPS',
         payload: {}
       });
   }

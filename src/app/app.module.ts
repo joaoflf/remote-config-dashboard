@@ -1,7 +1,8 @@
+import { app } from './state-management/app';
+import { apps } from './state-management/apps';
 import { properties } from './state-management/properties';
 import { featureToggles } from './state-management/feature-toggles';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { application } from './state-management/application';
 import { BrowserModule} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule,  } from '@angular/core';
@@ -14,7 +15,7 @@ import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
 import { EffectsModule } from '@ngrx/effects';
-import { ApplicationsEffects } from './state-management/application';
+import { AppsEffects } from './state-management/apps';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,13 @@ import { ApplicationsEffects } from './state-management/application';
     FormsModule,
     HttpModule,
     ClarityModule.forChild(),
-    StoreModule.provideStore({application, featureToggles, properties}),
+    StoreModule.provideStore({featureToggles, properties, apps, app}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    EffectsModule.run(ApplicationsEffects)
+    EffectsModule.run(AppsEffects)
   ],
   providers: [],
   bootstrap: [AppComponent]

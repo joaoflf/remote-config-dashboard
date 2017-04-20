@@ -35,15 +35,11 @@ export class ConfigPropertiesComponent implements OnInit {
   }
 
   onJsonEditorChange() {
-     try {
+
       this.store.dispatch({
         type: UPDATE_PROPERTIES,
-        payload:
-        {
-          properties: this.editor.get()
-        }
+        payload: this.editor.get()
       });
-    } catch (e) {
-    }
+
   }
 }

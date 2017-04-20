@@ -1,4 +1,0 @@
-export const UPDATE_APP_NAME = 'UPDATE_APP_NAME';
-export const APPLICATION_LAUNCH = 'APPLICATION_LAUNCH';
-export const LOAD_APPS_SUCCESS = 'LOAD_APPS_SUCCESS';
-export const GET_APP = 'GET_APP';

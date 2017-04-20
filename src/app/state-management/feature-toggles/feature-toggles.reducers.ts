@@ -28,7 +28,7 @@ export function featureToggles(featureTogglesState = initialFeatureTogglesState,
             ];
 
         default: {
-            return initialFeatureTogglesState;
+            return featureTogglesState;
         }
     }
 };
