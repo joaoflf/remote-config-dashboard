@@ -23,7 +23,7 @@ export function featureToggles(featureTogglesState = initialFeatureTogglesState,
             let index = featureTogglesState.map(toggle => toggle.name).indexOf(name);
             return [
                 ...featureTogglesState.slice(0, index),
-                Object.assign({}, featureTogglesState[index], { name: name, state: state }),
+                { ...featureTogglesState[index], name: name, state: state },
                 ...featureTogglesState.slice(index + 1)
             ];
 

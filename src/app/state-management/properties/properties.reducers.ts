@@ -6,7 +6,7 @@ import { initialPropertiesState } from './properties.state';
     switch (action.type) {
 
         case UPDATE_PROPERTIES:
-            return Object.assign({}, propertiesState, action.payload);
+            return { ...propertiesState, ...action.payload};
         default: {
             return propertiesState;
         }

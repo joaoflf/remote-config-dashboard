@@ -7,7 +7,6 @@ import { initialAppsState } from './apps.state';
 
         case LOAD_APPS_SUCCESS:
             return action.payload;
-
         case LOAD_APPS:
             return appsState;
         default: {

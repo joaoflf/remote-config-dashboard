@@ -7,7 +7,7 @@ import { Action } from '@ngrx/store';
 
         case UPDATE_APP_NAME:
             ({ name } = action.payload);
-           return Object.assign({}, appState, { name: name });
+           return { ...appState, name: name };
 
         default: {
             return appState;
