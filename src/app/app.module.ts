@@ -1,3 +1,4 @@
+import { properties } from './state-management/properties';
 import { featureToggles } from './state-management/feature-toggles';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { application } from './state-management/application';
@@ -13,8 +14,7 @@ import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.compo
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
 import { EffectsModule } from '@ngrx/effects';
-import { ApplicationsEffects } from './state-management/application/application.effects';
-
+import { ApplicationsEffects } from './state-management/application';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { ApplicationsEffects } from './state-management/application/application.
     FormsModule,
     HttpModule,
     ClarityModule.forChild(),
-    StoreModule.provideStore({application, featureToggles}),
+    StoreModule.provideStore({application, featureToggles, properties}),
     StoreDevtoolsModule.instrumentOnlyWithExtension({
       maxAge: 5
     }),

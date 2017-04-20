@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import { Application, UPDATE_PROPERTIES } from '../state-management/application';
+import { UPDATE_PROPERTIES } from '../state-management/properties';
 import { Component, OnInit, OnChanges, Input, SimpleChange} from '@angular/core';
 
 declare var JSONEditor;
@@ -14,7 +14,7 @@ export class ConfigPropertiesComponent implements OnInit {
 
   editor : any;
 
-  constructor(private store: Store<Application>) {
+  constructor(private store: Store<Object>) {
     this.store = store;
   }
 
@@ -26,10 +26,10 @@ export class ConfigPropertiesComponent implements OnInit {
       modes: ['tree', 'code'],
       onChange: this.onJsonEditorChange.bind(this)
     };
-    this.store.select('application').subscribe((application:Application) => {
+    this.store.select('properties').subscribe((properties) => {
       if (!this.editor) {
         let templateDivRef = document.getElementById('jsoneditor');
-        this.editor = new JSONEditor(templateDivRef, editorOptions, application.app.properties); 
+        this.editor = new JSONEditor(templateDivRef, editorOptions, properties); 
       }
     }); 
   }

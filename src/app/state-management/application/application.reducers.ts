@@ -1,15 +1,10 @@
 import { App } from '../app';
-import {
-    APPLICATION_LAUNCH,
-    UPDATE_APP_NAME,
-    UPDATE_PROPERTIES,
-    LOAD_APPS_SUCCESS
-} from './application.actions';
+import { APPLICATION_LAUNCH, UPDATE_APP_NAME, LOAD_APPS_SUCCESS } from './application.actions';
 import { Action } from '@ngrx/store';
 import { initialApplicationState } from './application.state';
 
  export function application(applicationState = initialApplicationState, action: Action) {
-    let name: String, properties: Object, appList: Array<App>;
+    let name: String, appList: Array<App>;
     switch (action.type) {
 
         case LOAD_APPS_SUCCESS:
@@ -20,9 +15,6 @@ import { initialApplicationState } from './application.state';
             ({ name } = action.payload);
            return Object.assign({}, applicationState, Object.assign({}, applicationState.app, { name: name }));
 
-        case UPDATE_PROPERTIES:
-            ({ properties } = action.payload);
-            return Object.assign({}, applicationState, Object.assign({}, applicationState.app, { properties: properties }));
         case APPLICATION_LAUNCH:
             return applicationState;
         default: {
