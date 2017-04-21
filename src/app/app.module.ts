@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { app } from './state-management/app';
 import { apps } from './state-management/apps';
 import { properties } from './state-management/properties';
@@ -37,6 +38,9 @@ import { AppsEffects } from './state-management/apps';
     EffectsModule.run(AppsEffects)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+],
 })
 export class AppModule { }

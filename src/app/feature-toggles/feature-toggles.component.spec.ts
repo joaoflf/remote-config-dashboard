@@ -1,3 +1,10 @@
+import { app } from '../state-management/app';
+import { apps } from '../state-management/apps';
+import { properties } from '../state-management/properties';
+import { featureToggles } from '../state-management/feature-toggles';
+import { StoreModule } from '@ngrx/store';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ClarityModule } from 'clarity-angular';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -11,16 +18,19 @@ describe('FeatureTogglesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeatureTogglesComponent ]
+      imports: [
+        ClarityModule.forChild(),
+        ReactiveFormsModule,
+        StoreModule.provideStore({ featureToggles, properties, apps, app })],
+      declarations: [FeatureTogglesComponent]
     })
-    .compileComponents();
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(FeatureTogglesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(FeatureTogglesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
