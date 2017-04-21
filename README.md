@@ -17,11 +17,16 @@ The idea is for the app to manage all its state offline and when the user wishes
 
 
 ### Development
-Run `npm start` to launch the web server and json mock api server. Navigate to `http://localhost:4200/` for the web app and http://localhost:3000/ for the api. The app will automatically reload if you change any of the source files.
+Run `npm start` to launch the web server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Next steps
-The imediate next step is develop a separate web API in ExpressJS+MongoDB or similar to manage and serve the configs.
-Later will come the introduction of [ngrx/effects](https://github.com/ngrx/effects) to connect the web app to this API.
+[ ] Search toggles
+[ ] Optimise modals (add toggle)
+[ ] Fetch app details from API
+[ ] Change App
+[ ] Sync Button
+[ ] URL with app name
+[ ] Loading States
 
 ## Credits
 In order to build this dashboard, some amazing open source projects and components were used. These include [ngrx](https://github.com/ngrx), [ClarityUI](https://vmware.github.io/clarity/) and [JSONEditor](https://github.com/josdejong/jsoneditor)
