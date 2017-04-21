@@ -20,7 +20,7 @@ describe('App: RemoteConfigDashboard', () => {
         ReactiveFormsModule,
          StoreModule.provideStore({ featureToggles, properties, apps, app })
         ],
-        
+
       declarations: [
         AppComponent,
         FeatureTogglesComponent,
