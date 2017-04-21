@@ -12,4 +12,3 @@ import { initialPropertiesState } from './properties.state';
         }
     }
 };
-

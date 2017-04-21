@@ -15,7 +15,7 @@ export class AppsEffects {
 
 @Effect() appLaunch$ = this.actions$
       .ofType(LOAD_APPS)
-      .switchMap(() => this.http.get('/apps')
+      .switchMap(() => this.http.get('https://demo6219157.mockable.io/apps')
         .map(res => res.json()))
       .map(apps => {
         return {
