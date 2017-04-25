@@ -1,10 +1,17 @@
-import { ADD_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE } from './feature-toggles.actions';
+import {
+    ADD_FEATURE_TOGGLE,
+    LOAD_TOGGLES_SUCCESS,
+    REMOVE_FEATURE_TOGGLE,
+    UPDATE_FEATURE_TOGGLE
+} from './feature-toggles.actions';
 import { Action } from '@ngrx/store';
-import { initialFeatureTogglesState } from './feature-toggles.state';
 
-export function featureToggles(featureTogglesState = initialFeatureTogglesState, action: Action) {
+export function featureToggles(featureTogglesState = [], action: Action) {
     let state: boolean, name: String;
     switch (action.type) {
+
+        case LOAD_TOGGLES_SUCCESS:
+            return [...action.payload];
 
         case ADD_FEATURE_TOGGLE:
             ({ name } = action.payload);

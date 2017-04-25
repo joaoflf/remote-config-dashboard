@@ -8,6 +8,7 @@ module.exports = function(config) {
         plugins: [
             require('karma-jasmine'),
             require('karma-jasmine-html-reporter'),
+            require('karma-teamcity-reporter'),
             require('karma-coverage-istanbul-reporter'),
             require('karma-chrome-launcher'),
             require('@angular/cli/plugins/karma')

@@ -1,3 +1,4 @@
+import { AppEffects } from './state-management/app';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { app } from './state-management/app';
 import { apps } from './state-management/apps';
@@ -35,7 +36,8 @@ import { AppsEffects } from './state-management/apps';
     }),
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    EffectsModule.run(AppsEffects)
+    EffectsModule.run(AppsEffects),
+    EffectsModule.run(AppEffects)
   ],
   providers: [],
   bootstrap: [AppComponent],

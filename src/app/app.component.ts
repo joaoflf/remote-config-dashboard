@@ -1,5 +1,6 @@
 import { LOAD_APPS } from './state-management/apps';
-import { Component } from '@angular/core';
+import { LOAD_APP } from './state-management/app';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { App } from './state-management/app';
@@ -9,18 +10,31 @@ import { App } from './state-management/app';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   selectedApp$: Observable<App>;
   apps$: Observable<Array<App>>;
 
   constructor(private store: Store<App>) {
+  }
+  ngOnInit(): void {
 
-    this.selectedApp$ = store.select('app');
-    this.apps$ = store.select('apps');
-
-    store.dispatch({
-        type: 'LOAD_APPS',
-        payload: {}
-      });
+    this.selectedApp$ = this.store.select('app');
+    this.apps$ = this.store.select('apps');
+    //select and fetch the first app on the list
+    this.store.select('apps').subscribe((apps: Array<App>) => {
+      if (apps.length) {
+        this.store.dispatch({
+          type: LOAD_APP,
+          payload: {
+            id: apps[0].id
+          }
+        });
+      }
+    });
+    //Load list of apps from API
+    this.store.dispatch({
+      type: LOAD_APPS,
+      payload: {}
+    });
   }
 }

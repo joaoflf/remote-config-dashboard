@@ -2,7 +2,7 @@ import {UPDATE_APP_NAME} from '.';
 import { app } from '.';
 
 
-describe('apps reducer', () => {
+describe('app reducer', () => {
     it('should return current state when no valid actions have been made', () => {
         const state = { id: '1', name: 'Web App' };
         const actual = app(state, { type: 'INVALID_ACTION', payload: {} });

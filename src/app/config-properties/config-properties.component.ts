@@ -31,6 +31,9 @@ export class ConfigPropertiesComponent implements OnInit {
         let templateDivRef = document.getElementById('jsoneditor');
         this.editor = new JSONEditor(templateDivRef, editorOptions, properties); 
       }
+      else {
+        this.editor.set(properties);
+      }
     }); 
   }
 
