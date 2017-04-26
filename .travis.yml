@@ -26,4 +26,4 @@ before_script:
 script: 
 - ng test --single-run
 - ng build --prod --base-href "https://joaoflf.github.io/remote-config-dashboard/" --aot=false
-- angular-cli-ghpages
+- angular-cli-ghpages --no-silent
