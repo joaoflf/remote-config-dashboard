@@ -13,17 +13,15 @@ Check out a live demo [here](https://joaoflf.github.io/remote-config-dashboard/)
 This web app is built using Angular 4 with the [angular-cli](https://github.com/angular/angular-cli).
 It also uses [ngrx](https://github.com/ngrx) to manage its state, so you can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to inspect it.
 The idea is for the app to manage all its state offline and when the user wishes, he can press a *publish* button to synchronize the config json with the service.
-[ngrx/effects](https://github.com/ngrx/effects) are planned to be used to plugin a service for fetching and changing data.
-
+[ngrx/effects](https://github.com/ngrx/effects) used to connect to a mock api for fetching data.
 
 ### Development
 Run `npm start` to launch the web server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The web app is using a mock api provided by mockable.ii
 
 ## Next steps
 [ ] Search toggles
 [ ] Optimise modals (add toggle)
-[ ] Fetch app details from API
-[ ] Change App
 [ ] Sync Button
 [ ] URL with app name
 [ ] Loading States
