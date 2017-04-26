@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/joaoflf/remote-config-dashboard.svg?branch=master)](https://travis-ci.org/joaoflf/remote-config-dashboard)
 # Remote Config Dashboard
 
 Feature toggles are becoming a necessity for organizations that wish to release in a continuous fashion. They allow for the decoupling of technical and product releases, rapid failover recovery and if extended even cool stuff like A/B testing.
