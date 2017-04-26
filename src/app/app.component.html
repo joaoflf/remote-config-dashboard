@@ -19,7 +19,7 @@
                         <clr-icon shape="caret down"></clr-icon>
                     </button>
                     <div class="dropdown-menu">
-                        <a *ngFor="let app of (apps$ | async)" href="..." clrDropdownItem>{{ app.name }}</a>
+                        <a *ngFor="let app of (apps$ | async)" (click)="loadApp(app.id)" clrDropdownItem>{{ app.name }}</a>
                     </div>
                 </clr-dropdown>
             </div>
