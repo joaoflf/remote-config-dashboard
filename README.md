@@ -9,6 +9,8 @@ It comprises of a web interface to manage feature toggles and other configurable
 It is meant to be open to be modified in order to suit different needs.
 Check out a live demo [here](https://joaoflf.github.io/remote-config-dashboard/).
 
+<p align="center"><img src="https://preview.ibb.co/hoZqwQ/Screenshot_2017_04_26_14_38_18.png" border="0" /></p>
+
 ### App & State Management
 This web app is built using Angular 4 with the [angular-cli](https://github.com/angular/angular-cli).
 It also uses [ngrx](https://github.com/ngrx) to manage its state, so you can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) to inspect it.
