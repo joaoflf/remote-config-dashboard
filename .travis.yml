@@ -19,7 +19,11 @@ before_install:
 
 before_script:
 - npm install -g @angular/cli
+- npm install -g angular-cli-ghpages
 - npm install -g karma
 - npm install
 
-script: ng test --single-run
+script: 
+- ng test --single-run
+- ng build --prod --base-href "https://joaoflf.github.io/remote-config-dashboard/" --aot=false
+- angular-cli-ghpages
