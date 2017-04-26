@@ -20,11 +20,11 @@ Run `npm start` to launch the web server. Navigate to `http://localhost:4200/`. 
 The web app is using a mock api provided by mockable.ii
 
 ## Next steps
-[ ] Search toggles
-[ ] Optimise modals (add toggle)
-[ ] Sync Button
-[ ] URL with app name
-[ ] Loading States
+* Search toggles
+* Optimise modals (add toggle)
+* Sync Button
+* URL with app name
+* Loading States
 
 ## Credits
 In order to build this dashboard, some amazing open source projects and components were used. These include [ngrx](https://github.com/ngrx), [ClarityUI](https://vmware.github.io/clarity/) and [JSONEditor](https://github.com/josdejong/jsoneditor)
