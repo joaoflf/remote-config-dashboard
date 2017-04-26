@@ -1,6 +1,9 @@
-[![Build Status](https://travis-ci.org/joaoflf/remote-config-dashboard.svg?branch=master)](https://travis-ci.org/joaoflf/remote-config-dashboard)
 # Remote Config Dashboard
+[![Build Status](https://travis-ci.org/joaoflf/remote-config-dashboard.svg?branch=master)](https://travis-ci.org/joaoflf/remote-config-dashboard)
 
+Angular Dashboard to manage feature toggles and remote configuration.
+
+### About
 Feature toggles are becoming a necessity for organizations that wish to release in a continuous fashion. They allow for the decoupling of technical and product releases, rapid failover recovery and if extended even cool stuff like A/B testing.
 There are some great commercial options to respond to this need. However, for a simple implementation a basic service with a list of toggles and their states would suffice.
 
