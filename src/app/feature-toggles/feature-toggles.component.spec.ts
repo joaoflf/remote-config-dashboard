@@ -9,7 +9,8 @@ import { ClarityModule } from 'clarity-angular';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { FeatureTogglesComponent } from './feature-toggles.component';
 
 describe('FeatureTogglesComponent', () => {
@@ -20,9 +21,10 @@ describe('FeatureTogglesComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ClarityModule.forChild(),
+        FormsModule,
         ReactiveFormsModule,
         StoreModule.provideStore({ featureToggles, properties, apps, app })],
-      declarations: [FeatureTogglesComponent]
+      declarations: [FeatureTogglesComponent, FilterPipe]
     })
       .compileComponents()
       .then(() => {

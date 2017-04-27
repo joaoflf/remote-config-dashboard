@@ -8,7 +8,8 @@ import { ConfigPropertiesComponent } from './config-properties/config-properties
 import { FeatureTogglesComponent } from './feature-toggles/feature-toggles.component';
 import { ClarityModule } from 'clarity-angular';
 /* tslint:disable:no-unused-variable */
-
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
@@ -18,13 +19,15 @@ describe('App: RemoteConfigDashboard', () => {
       imports: [
         ClarityModule.forChild(),
         ReactiveFormsModule,
-         StoreModule.provideStore({ featureToggles, properties, apps, app })
-        ],
+        FormsModule,
+        StoreModule.provideStore({ featureToggles, properties, apps, app })
+      ],
 
       declarations: [
         AppComponent,
         FeatureTogglesComponent,
-    ConfigPropertiesComponent
+        ConfigPropertiesComponent,
+        FilterPipe
       ],
     });
   });
