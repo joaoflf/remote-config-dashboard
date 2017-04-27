@@ -1,6 +1,7 @@
 .toggles-table {
     padding: 0;
     margin: 0;
+    box-shadow: 2px 3px 4px -1px rgba(0, 0, 0, 0.1);
     td {
         vertical-align: middle;
     }
@@ -9,9 +10,26 @@
     }
 }
 
-.remove-toggle {
-    cursor: pointer;
-    &:hover {
-        color: black;
-    }
+.remove-toggle-button {
+    margin-right: 0;
+}
+
+.new-toggle-button {
+    margin: 0;
+}
+
+.actions-header {
+    text-align: right;
+    padding: 10px 12px;
+}
+
+.actions-cell {
+    text-align: right;
+    padding: 10px 12px;
+}
+
+.toggle-name-header,
+.toggle-name-cell {
+    padding-left: 20px;
+    text-align: left;
 }

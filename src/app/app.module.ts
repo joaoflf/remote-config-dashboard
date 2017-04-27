@@ -18,12 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigPropertiesComponent } from './config-properties/config-properties.component';
 import { EffectsModule } from '@ngrx/effects';
 import { AppsEffects } from './state-management/apps';
+import { FilterPipe } from './shared/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     FeatureTogglesComponent,
-    ConfigPropertiesComponent
+    ConfigPropertiesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { AppsEffects } from './state-management/apps';
     EffectsModule.run(AppsEffects),
     EffectsModule.run(AppEffects)
   ],
-  providers: [],
+  providers: [FilterPipe],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

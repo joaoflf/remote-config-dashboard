@@ -1,23 +1,32 @@
-<button class="btn btn-outline-primary btn-sm" (click)="openAddToggleModal()">Add Toggle</button>
 <table class="toggles-table table">
     <thead>
         <tr>
-            <th>Feature</th>
-            <th>State</th>
+            <th class="toggle-name-header">
+                <input type="text" placeholder="Find a feature toggle" size="25" [(ngModel)]="searchTerm">
+            </th>
             <th></th>
+            <th class="actions-header">
+                <button class="new-toggle-button btn btn-outline-primary btn-sm" (click)="openAddToggleModal()">
+                    New
+                     <clr-icon class="" shape="plus" size="16"></clr-icon>
+                </button>
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let toggle of featureToggles$ | async">
-            <td>{{toggle.name}}</td>
+        <tr *ngFor="let toggle of featureToggles$ | async | filter:searchTerm">
+            <td class="toggle-name-cell">{{toggle.name}}</td>
             <td>
                 <div class="toggle-switch">
                     <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.name, $event.target.checked)">
                     <label for="{{toggle.name}}"></label>
                 </div>
             </td>
-            <td>
-                <clr-icon class="remove-toggle" shape="trash" size="16" (click)="removeFeatureToggle(toggle.name)"></clr-icon>
+            <td class="actions-cell">
+                <button type="submit" class="remove-toggle-button btn btn-outline-danger btn-sm" (click)="removeFeatureToggle(toggle.name)">
+                    Remove
+                    <clr-icon shape="trash" size="16"></clr-icon>
+                </button>
             </td>
         </tr>
     </tbody>
@@ -64,12 +73,13 @@
         <button class="btn btn-primary" (click)="addToggleClicked()" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
     </div>
 </clr-modal>
-<clr-modal [(clrModalOpen)]="isConfirmationModalOpen">
+<clr-modal [(clrModalOpen)]="isConfirmationModalOpen" [clrModalClosable]="false">
+    <h5 class="modal-title">Remove toggle</h5>
     <div class="modal-body">
         <p>{{this.confirmationMessage}}</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="isConfirmationModalOpen = false">No</button>
-        <button type="button" class="btn btn-primary" (click)="confirmToggleRemoval()">Yes</button>
+        <button type="button" class="btn btn-danger" (click)="confirmToggleRemoval()">Remove</button>
     </div>
 </clr-modal>
