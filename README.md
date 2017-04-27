@@ -13,7 +13,7 @@ It comprises of a web interface to manage feature toggles and other configurable
 It is meant to be open to be modified in order to suit different needs.
 Check out a live demo [here](https://joaoflf.github.io/remote-config-dashboard/).
 
-<p align="center"><img src="https://preview.ibb.co/hoZqwQ/Screenshot_2017_04_26_14_38_18.png" border="0" /></p>
+<p align="center"><img src="https://www.dropbox.com/s/6o78inik4pr5cak/Screenshot%202017-04-27%2016.05.06.png?raw=1" border="0" /></p>
 
 ### App & State Management
 This web app is built using Angular 4 with the [angular-cli](https://github.com/angular/angular-cli).
