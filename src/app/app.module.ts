@@ -19,13 +19,16 @@ import { ConfigPropertiesComponent } from './config-properties/config-properties
 import { EffectsModule } from '@ngrx/effects';
 import { AppsEffects } from './state-management/apps';
 import { FilterPipe } from './shared/pipes/filter.pipe';
+import { AddToggleModalComponent } from './add-toggle-modal/add-toggle-modal.component';
+import { FeatureTogglesService } from "./feature-toggles/feature-toggles.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     FeatureTogglesComponent,
     ConfigPropertiesComponent,
-    FilterPipe
+    FilterPipe,
+    AddToggleModalComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,7 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
     EffectsModule.run(AppsEffects),
     EffectsModule.run(AppEffects)
   ],
-  providers: [FilterPipe],
+  providers: [FilterPipe, FeatureTogglesService],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

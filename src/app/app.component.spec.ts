@@ -1,3 +1,5 @@
+import { FeatureTogglesService } from './feature-toggles/feature-toggles.service';
+import { AddToggleModalComponent } from './add-toggle-modal/add-toggle-modal.component';
 import { app } from './state-management/app';
 import { apps } from './state-management/apps';
 import { properties } from './state-management/properties';
@@ -27,8 +29,12 @@ describe('App: RemoteConfigDashboard', () => {
         AppComponent,
         FeatureTogglesComponent,
         ConfigPropertiesComponent,
-        FilterPipe
+        FilterPipe,
+        AddToggleModalComponent
       ],
+      providers: [
+        FeatureTogglesService
+      ]
     });
   });
 

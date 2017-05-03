@@ -1,9 +1,11 @@
+import { FeatureTogglesService } from './feature-toggles.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddToggleModalComponent } from '../add-toggle-modal/add-toggle-modal.component';
 import { app } from '../state-management/app';
 import { apps } from '../state-management/apps';
 import { properties } from '../state-management/properties';
 import { featureToggles } from '../state-management/feature-toggles';
 import { StoreModule } from '@ngrx/store';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
@@ -21,10 +23,13 @@ describe('FeatureTogglesComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ClarityModule.forChild(),
-        FormsModule,
         ReactiveFormsModule,
+        FormsModule,
         StoreModule.provideStore({ featureToggles, properties, apps, app })],
-      declarations: [FeatureTogglesComponent, FilterPipe]
+      declarations: [FeatureTogglesComponent, FilterPipe, AddToggleModalComponent],
+      providers: [
+        FeatureTogglesService
+      ]
     })
       .compileComponents()
       .then(() => {

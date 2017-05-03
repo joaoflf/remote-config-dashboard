@@ -6,7 +6,7 @@
             </th>
             <th></th>
             <th class="actions-header">
-                <button class="new-toggle-button btn btn-outline-primary btn-sm" (click)="openAddToggleModal()">
+                <button class="new-toggle-button btn btn-outline-primary btn-sm" (click)="addToggleModal.openAddToggleModal()">
                     New
                      <clr-icon class="" shape="plus" size="16"></clr-icon>
                 </button>
@@ -18,12 +18,12 @@
             <td class="toggle-name-cell">{{toggle.name}}</td>
             <td>
                 <div class="toggle-switch">
-                    <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.name, $event.target.checked)">
+                    <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="featureTogglesService.updateFeatureToggle(toggle.name, $event.target.checked)">
                     <label for="{{toggle.name}}"></label>
                 </div>
             </td>
             <td class="actions-cell">
-                <button type="submit" class="remove-toggle-button btn btn-outline-danger btn-sm" (click)="removeFeatureToggle(toggle.name)">
+                <button type="submit" class="remove-toggle-button btn btn-outline-danger btn-sm" (click)="openRemovalConfirmationModal(toggle.name)">
                     Remove
                     <clr-icon shape="trash" size="16"></clr-icon>
                 </button>
@@ -32,47 +32,7 @@
     </tbody>
 </table>
 
-
-<clr-modal [(clrModalOpen)]="isAddToggleModalOpen" [clrModalClosable]="false">
-    <h5 class="modal-title">Create a new feature toggle</h5>
-    <div class="modal-body">
-        <div class="alert alert-danger" *ngIf="toggleExistsWarning">
-            <div class="alert-item">
-                <span class="alert-text">
-                A toggle with this name already exists.
-            </span>
-            </div>
-        </div>
-        <form class="form" [formGroup]="featureToggleForm" [hidden]="submitted">
-            <section class="form-block">
-                <div class="form-group">
-                    <label for="toggleName">Feature Name</label>
-                    <label for="toggleName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-right" [class.invalid]="featureToggleForm.get('toggleName').invalid
-                    && (featureToggleForm.get('toggleName').dirty || featureToggleForm.get('toggleName').touched)">
-                        <input id="toggleName" type="text"
-                            formControlName="toggleName">
-                        <span class="tooltip-content">
-                            Name is required.
-                        </span>
-                    </label>
-                </div>
-                <div formGroupName="toggleState">
-                    <div class="form-group">
-                        <label for="toggleState">Initial State</label>
-                        <div for="toggleState" class="toggle-switch">
-                            <input id="state" type="checkbox" formControlName="state">
-                            <label for="state"></label>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="isAddToggleModalOpen = false">Cancel</button>
-        <button class="btn btn-primary" (click)="addToggleClicked()" type="submit" [disabled]="featureToggleForm.invalid">Create</button>
-    </div>
-</clr-modal>
+<add-toggle-modal></add-toggle-modal>
 <clr-modal [(clrModalOpen)]="isConfirmationModalOpen" [clrModalClosable]="false">
     <h5 class="modal-title">Remove toggle</h5>
     <div class="modal-body">
