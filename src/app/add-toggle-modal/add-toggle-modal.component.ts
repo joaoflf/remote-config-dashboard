@@ -1,6 +1,7 @@
+import { Store } from '@ngrx/store';
+import { ADD_FEATURE_TOGGLE, FeatureToggle, featureToggles } from '../state-management/feature-toggles';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { FeatureTogglesService } from "../feature-toggles/feature-toggles.service";
 
 @Component({
   selector: 'add-toggle-modal',
@@ -12,8 +13,9 @@ export class AddToggleModalComponent implements OnInit {
   submitted = false;
   isAddToggleModalOpen = false;
   toggleExistsWarning = false;
+  featureToggles: FeatureToggle[];
 
-  constructor(private fb: FormBuilder, private featureTogglesService: FeatureTogglesService) { }
+  constructor(private fb: FormBuilder, private store: Store<FeatureToggle[]>) { }
 
   ngOnInit() {
     this.featureToggleForm = this.fb.group({
@@ -34,15 +36,27 @@ export class AddToggleModalComponent implements OnInit {
   addToggleClicked() {
     this.toggleExistsWarning = false;
     let formData = this.featureToggleForm.value;
-    if (this.featureTogglesService.doesToggleAlreadyExist(formData.toggleName)) {
+   
+    if (this.doesToggleAlreadyExist(formData.toggleName)) {
       this.toggleExistsWarning = true;
     } else {
       this.isAddToggleModalOpen = false;
-      this.featureTogglesService.addFeatureToggle({
+      this.addFeatureToggle({
         name: formData.toggleName,
         state: !!formData.toggleState.state
       })
     }
+  }
+  doesToggleAlreadyExist(name) {
+    return this.featureToggles.filter((toggle) => toggle.name === name).length;
+  }
+
+
+  addFeatureToggle(toggle: FeatureToggle) {
+    this.store.dispatch({
+        type: ADD_FEATURE_TOGGLE,
+        payload: {...toggle}
+      });
   }
 
 }

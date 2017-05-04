@@ -20,7 +20,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppsEffects } from './state-management/apps';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { AddToggleModalComponent } from './add-toggle-modal/add-toggle-modal.component';
-import { FeatureTogglesService } from "./feature-toggles/feature-toggles.service";
 
 @NgModule({
   declarations: [
@@ -44,7 +43,7 @@ import { FeatureTogglesService } from "./feature-toggles/feature-toggles.service
     EffectsModule.run(AppsEffects),
     EffectsModule.run(AppEffects)
   ],
-  providers: [FilterPipe, FeatureTogglesService],
+  providers: [FilterPipe],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

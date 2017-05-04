@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th class="toggle-name-header">
-                <input type="text" placeholder="Find a feature toggle" size="25" [(ngModel)]="searchTerm">
+                <input class='toggle-search-input' type="text" placeholder="Find a feature toggle" size="25" [(ngModel)]="searchTerm">
             </th>
             <th></th>
             <th class="actions-header">
@@ -18,7 +18,7 @@
             <td class="toggle-name-cell">{{toggle.name}}</td>
             <td>
                 <div class="toggle-switch">
-                    <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="featureTogglesService.updateFeatureToggle(toggle.name, $event.target.checked)">
+                    <input type="checkbox" id="{{toggle.name}}" [attr.checked]="toggle.state ? true : null" (change)="updateFeatureToggle(toggle.name, $event.target.checked)">
                     <label for="{{toggle.name}}"></label>
                 </div>
             </td>

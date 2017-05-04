@@ -1,11 +1,5 @@
-import { app } from '../state-management/app';
-import { apps } from '../state-management/apps';
-import { properties } from '../state-management/properties';
-import { featureToggles } from '../state-management/feature-toggles';
-import { StoreModule } from '@ngrx/store';
-import { ClarityModule } from 'clarity-angular';
+import { AppModule } from '../';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ConfigPropertiesComponent } from './config-properties.component';
 
 describe('ConfigPropertiesComponent', () => {
@@ -14,18 +8,14 @@ describe('ConfigPropertiesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-       imports: [
-        ClarityModule.forChild(),
-        StoreModule.provideStore({ featureToggles, properties, apps, app })],
-      declarations: [ ConfigPropertiesComponent ]
+      imports: [AppModule]
     })
-    .compileComponents()
-    .then(() => {
-
-    fixture = TestBed.createComponent(ConfigPropertiesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+      .compileComponents()
+      .then(() => {
+        fixture = TestBed.createComponent(ConfigPropertiesComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+      });
   }));
 
   it('should create', () => {

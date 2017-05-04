@@ -1,18 +1,9 @@
-import { FeatureTogglesService } from './feature-toggles.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AddToggleModalComponent } from '../add-toggle-modal/add-toggle-modal.component';
-import { app } from '../state-management/app';
-import { apps } from '../state-management/apps';
-import { properties } from '../state-management/properties';
-import { featureToggles } from '../state-management/feature-toggles';
-import { StoreModule } from '@ngrx/store';
-import { ClarityModule } from 'clarity-angular';
+import { LOAD_TOGGLES_SUCCESS } from '../state-management/feature-toggles';
+import { Store } from '@ngrx/store';
+import { AppModule } from '../';
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FilterPipe } from '../shared/pipes/filter.pipe';
 import { FeatureTogglesComponent } from './feature-toggles.component';
 
 describe('FeatureTogglesComponent', () => {
@@ -21,25 +12,59 @@ describe('FeatureTogglesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ClarityModule.forChild(),
-        ReactiveFormsModule,
-        FormsModule,
-        StoreModule.provideStore({ featureToggles, properties, apps, app })],
-      declarations: [FeatureTogglesComponent, FilterPipe, AddToggleModalComponent],
-      providers: [
-        FeatureTogglesService
-      ]
+      imports: [AppModule]
     })
       .compileComponents()
       .then(() => {
         fixture = TestBed.createComponent(FeatureTogglesComponent);
+        let store = fixture.debugElement.injector.get(Store);
+        store.dispatch({
+          type: LOAD_TOGGLES_SUCCESS,
+          payload: [
+            {
+              name: 'testToggle',
+              state: false
+            }
+          ]
+        });
         component = fixture.componentInstance;
         fixture.detectChanges();
       });
   }));
 
-  it('should create', () => {
+  it('should create the component and view elements', () => {
     expect(component).toBeTruthy();
+fixture.detectChanges();
+    const element = fixture.nativeElement;
+    expect(element.querySelector('.toggles-table')).toBeTruthy();
+    expect(element.querySelector('.toggle-search-input')).toBeTruthy();
+    expect(element.querySelector('.new-toggle-button')).toBeTruthy();
+  });
+
+  it('should get featureToggles from store and render them in the table', () => {
+    component.featureToggles$.subscribe((toggles) => {
+      expect(toggles[0].name).toBe('testToggle');
+    });
+
+    const element = fixture.nativeElement;
+    expect(element.querySelector('.toggle-name-cell').innerHTML).toBe('testToggle');
+  });
+
+  it('should remove a toggle with confirmation modal', () => {
+    component.openRemovalConfirmationModal('testToggle');
+    expect(component.confirmationMessage).toBe('Are you sure you want to remove the toggle testToggle?');
+    expect(component.isConfirmationModalOpen).toBeTruthy();
+
+    component.confirmToggleRemoval();
+    component.featureToggles$.subscribe((toggles) => {
+      expect(toggles.length).toBe(0);
+    });
+  });
+
+  it('should update a toggle', () => {
+    component.updateFeatureToggle('testToggle', true);
+    component.featureToggles$.subscribe((toggles) => {
+      expect(toggles[0].state).toBeTruthy();
+    });
   });
 });

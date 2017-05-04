@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ADD_FEATURE_TOGGLE, UPDATE_FEATURE_TOGGLE, REMOVE_FEATURE_TOGGLE } from '../state-management/feature-toggles';
-import { FeatureTogglesService } from "./feature-toggles.service";
-
 
 @Component({
   selector: 'app-feature-toggles',
@@ -14,21 +12,25 @@ import { FeatureTogglesService } from "./feature-toggles.service";
 })
 export class FeatureTogglesComponent implements OnInit {
 
-  @ViewChild(AddToggleModalComponent)
-  private addToggleModal: AddToggleModalComponent;
+  @ViewChild(AddToggleModalComponent) addToggleModal: AddToggleModalComponent
 
   featureToggles$: Observable<Array<FeatureToggle>>;
   isConfirmationModalOpen = false;
   selectedToggleName: String;
   confirmationMessage: String;
 
-  constructor(private store: Store<FeatureToggle[]>, private featureTogglesService: FeatureTogglesService) {
-    this.featureToggles$ = featureTogglesService.getFeatureToggles();
-    // for sync operations
-
+  constructor(private store: Store<FeatureToggle[]>) {
+    this.featureToggles$ = this.store.select('featureToggles');
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    //pass array of toggles to add modal, to check if a toggle already exists before adding
+    this.featureToggles$.subscribe((toggles) => {
+      this.addToggleModal.featureToggles = toggles;
+    });
   }
 
   openRemovalConfirmationModal(name: String) {
@@ -39,7 +41,28 @@ export class FeatureTogglesComponent implements OnInit {
 
   confirmToggleRemoval() {
     this.isConfirmationModalOpen = false;
-    this.featureTogglesService.removeFeatureToggle(this.selectedToggleName)
+    this.removeFeatureToggle(this.selectedToggleName)
+  }
+
+  updateFeatureToggle(name: String, state: boolean) {
+    this.store.dispatch({
+      type: UPDATE_FEATURE_TOGGLE,
+      payload:
+      {
+        name: name,
+        state: state
+      }
+    });
+  }
+
+  removeFeatureToggle(name: String) {
+    this.store.dispatch({
+      type: REMOVE_FEATURE_TOGGLE,
+      payload:
+      {
+        name: name
+      }
+    });
   }
 }
 
