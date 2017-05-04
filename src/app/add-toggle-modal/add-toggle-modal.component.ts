@@ -12,7 +12,7 @@ export class AddToggleModalComponent implements OnInit {
   featureToggleForm: any;
   submitted = false;
   isAddToggleModalOpen = false;
-  toggleExistsWarning = false;
+  showToggleExistsWarning = false;
   featureToggles: FeatureToggle[];
 
   constructor(private fb: FormBuilder, private store: Store<FeatureToggle[]>) { }
@@ -28,17 +28,17 @@ export class AddToggleModalComponent implements OnInit {
 
   openAddToggleModal() {
     this.featureToggleForm.reset();
-    this.toggleExistsWarning = false;
+    this.showToggleExistsWarning = false;
     this.submitted = false;
     this.isAddToggleModalOpen = true;
   }
 
   addToggleClicked() {
-    this.toggleExistsWarning = false;
+    this.showToggleExistsWarning = false;
     let formData = this.featureToggleForm.value;
    
     if (this.doesToggleAlreadyExist(formData.toggleName)) {
-      this.toggleExistsWarning = true;
+      this.showToggleExistsWarning = true;
     } else {
       this.isAddToggleModalOpen = false;
       this.addFeatureToggle({
@@ -50,7 +50,6 @@ export class AddToggleModalComponent implements OnInit {
   doesToggleAlreadyExist(name) {
     return this.featureToggles.filter((toggle) => toggle.name === name).length;
   }
-
 
   addFeatureToggle(toggle: FeatureToggle) {
     this.store.dispatch({

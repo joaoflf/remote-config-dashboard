@@ -1,7 +1,7 @@
 <clr-modal [(clrModalOpen)]="isAddToggleModalOpen" [clrModalClosable]="false">
     <h5 class="modal-title">Create a new feature toggle</h5>
     <div class="modal-body">
-        <div class="alert alert-danger" *ngIf="toggleExistsWarning">
+        <div class="toggle-exists-alert alert alert-danger" *ngIf="showToggleExistsWarning">
             <div class="alert-item">
                 <span class="alert-text">
                 A toggle with this name already exists.
@@ -14,7 +14,7 @@
                     <label for="toggleName">Feature Name</label>
                     <label for="toggleName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-right" [class.invalid]="featureToggleForm.get('toggleName').invalid
                     && (featureToggleForm.get('toggleName').dirty || featureToggleForm.get('toggleName').touched)">
-                        <input id="toggleName" type="text"
+                        <input autofocus id="toggleName" type="text"
                             formControlName="toggleName">
                         <span class="tooltip-content">
                             Name is required.

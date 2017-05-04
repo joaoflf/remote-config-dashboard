@@ -34,8 +34,7 @@ describe('FeatureTogglesComponent', () => {
 
   it('should create the component and view elements', () => {
     expect(component).toBeTruthy();
-fixture.detectChanges();
-    const element = fixture.nativeElement;
+    let element = fixture.nativeElement;
     expect(element.querySelector('.toggles-table')).toBeTruthy();
     expect(element.querySelector('.toggle-search-input')).toBeTruthy();
     expect(element.querySelector('.new-toggle-button')).toBeTruthy();
@@ -46,7 +45,7 @@ fixture.detectChanges();
       expect(toggles[0].name).toBe('testToggle');
     });
 
-    const element = fixture.nativeElement;
+    let element = fixture.nativeElement;
     expect(element.querySelector('.toggle-name-cell').innerHTML).toBe('testToggle');
   });
 
