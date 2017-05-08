@@ -38,7 +38,7 @@ describe('ConfigPropertiesComponent', () => {
     expect(fixture.nativeElement.querySelector('.jsoneditor-string').innerHTML).toBe('test');
   });
 
-  it('should dispatch an action to store when editor changes', () => { 
+  it('should dispatch an action to store when editor changes', () => {
     let dispatchAction = spyOn(store, 'dispatch').and.callThrough();
     component.ngAfterViewInit();
     store.dispatch({
@@ -56,7 +56,7 @@ describe('ConfigPropertiesComponent', () => {
     });
   });
 
-  it('should update the json editor component with the changed properties', () => { 
+  it('should update the json editor component with the changed properties', () => {
     let updateEditor = spyOn(component.editor, 'set').and.callThrough();
     component.ngAfterViewInit();
     store.dispatch({
