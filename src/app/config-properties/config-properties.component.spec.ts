@@ -57,7 +57,6 @@ describe('ConfigPropertiesComponent', () => {
   });
 
   it('should update the json editor component with the changed properties', () => {
-    let updateEditor = spyOn(component.editor, 'set').and.callThrough();
     component.ngAfterViewInit();
     store.dispatch({
       type: LOAD_PROPERTIES_SUCCESS,
@@ -65,6 +64,7 @@ describe('ConfigPropertiesComponent', () => {
         testProperty: 'test'
       }
     });
+    let updateEditor = spyOn(component.editor, 'set').and.callThrough();
     store.dispatch({
       type: UPDATE_PROPERTIES,
       payload: {
