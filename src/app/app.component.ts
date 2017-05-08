@@ -17,8 +17,8 @@ export class AppComponent implements OnInit {
 
   constructor(private store: Store<App>) {
   }
+  
   ngOnInit(): void {
-
     this.selectedApp$ = this.store.select('app');
     this.apps$ = this.store.select('apps');
     this.store.select('app').subscribe((app: App) => {
