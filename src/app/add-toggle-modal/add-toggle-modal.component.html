@@ -8,13 +8,13 @@
             </span>
             </div>
         </div>
-        <form class="form" [formGroup]="featureToggleForm" [hidden]="submitted">
+        <form class="form" [formGroup]="featureToggleForm" [hidden]="submitted" (keydown.enter)="addToggleClicked()">
             <section class="form-block">
                 <div class="form-group">
                     <label for="toggleName">Feature Name</label>
                     <label for="toggleName" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation tooltip-sm tooltip-right" [class.invalid]="featureToggleForm.get('toggleName').invalid
                     && (featureToggleForm.get('toggleName').dirty || featureToggleForm.get('toggleName').touched)">
-                        <input autofocus id="toggleName" type="text"
+                        <input #toggleName id="toggleName" type="text"
                             formControlName="toggleName">
                         <span class="tooltip-content">
                             Name is required.
