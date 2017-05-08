@@ -26,7 +26,6 @@ Run `npm start` to launch the web server. Navigate to `http://localhost:4200/`. 
 The web app is using a mock api provided by mockable.ii
 
 ## Next steps
-* Optimise modals (add toggle)
 * Sync Button
 * Loading States
 
